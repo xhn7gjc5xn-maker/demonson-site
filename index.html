@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DemonSon - DEMONIC LOVE</title>
+<title>DemonSon - Заброшенный ДК</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
@@ -16,234 +16,30 @@
 body{
   margin:0;
   font-family:'PT Mono', 'Press Start 2P', monospace;
-  background: #1a0a0a;
-  color:#f0b0b0;
+  background: #102a30;
+  color:#a0d0d0;
   overflow-x:hidden;
   position:relative;
   min-height:100vh;
 }
 
-/* ===== КРОВАВАЯ ТЕКСТУРА ===== */
+/* ===== ТЕКСТУРА ПЫЛИ ===== */
 body::before {
   content:"";
   position:fixed;
   inset:0;
   background-image: 
     repeating-linear-gradient(45deg, 
-      rgba(180, 20, 20, 0.03) 0px,
-      rgba(100, 10, 10, 0.04) 2px,
+      rgba(180, 200, 180, 0.02) 0px,
+      rgba(100, 120, 100, 0.03) 2px,
       transparent 2px,
       transparent 8px
     ),
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.1"/></svg>');
-  opacity:0.5;
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.08"/></svg>');
+  opacity:0.4;
   pointer-events:none;
   z-index:2;
   mix-blend-mode: multiply;
-}
-
-/* ===== ПЕНТАГРАММЫ ===== */
-.pentagrams {
-    position: fixed;
-    inset: 0;
-    background-image: 
-        repeating-linear-gradient(0deg, 
-            transparent 0px,
-            transparent 150px,
-            rgba(200, 0, 0, 0.02) 150px,
-            rgba(200, 0, 0, 0.02) 152px
-        ),
-        repeating-linear-gradient(90deg, 
-            transparent 0px,
-            transparent 150px,
-            rgba(200, 0, 0, 0.02) 150px,
-            rgba(200, 0, 0, 0.02) 152px
-        );
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.5;
-}
-
-/* ===== ДЕМОНИЧЕСКИЕ ЦЕПИ ===== */
-.chains {
-    position: fixed;
-    inset: 0;
-    background: 
-        repeating-linear-gradient(45deg, 
-            transparent 0px,
-            transparent 30px,
-            rgba(150, 50, 50, 0.1) 30px,
-            rgba(150, 50, 50, 0.1) 32px,
-            transparent 32px,
-            transparent 60px
-        ),
-        repeating-linear-gradient(135deg, 
-            transparent 0px,
-            transparent 30px,
-            rgba(150, 50, 50, 0.1) 30px,
-            rgba(150, 50, 50, 0.1) 32px,
-            transparent 32px,
-            transparent 60px
-        );
-    pointer-events: none;
-    z-index: 2;
-    mix-blend-mode: overlay;
-    animation: chains-rattle 10s infinite;
-}
-
-@keyframes chains-rattle {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(2px, -1px) rotate(0.5deg); }
-    75% { transform: translate(-1px, 2px) rotate(-0.5deg); }
-}
-
-/* ===== КРОВАВЫЕ ПОДТЕКИ ===== */
-.blood-drips {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    background: repeating-linear-gradient(
-        180deg,
-        transparent 0px,
-        transparent 30px,
-        rgba(180, 0, 0, 0.1) 30px,
-        rgba(180, 0, 0, 0.1) 35px,
-        transparent 35px,
-        transparent 60px
-    );
-    pointer-events: none;
-    z-index: 2;
-    animation: drip 8s linear infinite;
-}
-
-@keyframes drip {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 50px; }
-}
-
-/* ===== НЕОНОВЫЕ ПЕНТАГРАММЫ ===== */
-.neon-pentagram {
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    top: 20%;
-    left: 10%;
-    background: radial-gradient(circle, rgba(255, 0, 0, 0.2) 0%, transparent 70%);
-    filter: blur(20px);
-    pointer-events: none;
-    z-index: 1;
-    animation: neon-glow 4s infinite;
-}
-
-.neon-pentagram2 {
-    position: fixed;
-    width: 400px;
-    height: 400px;
-    bottom: 10%;
-    right: 5%;
-    background: radial-gradient(circle, rgba(255, 50, 0, 0.15) 0%, transparent 70%);
-    filter: blur(30px);
-    pointer-events: none;
-    z-index: 1;
-    animation: neon-glow 6s infinite reverse;
-}
-
-@keyframes neon-glow {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.2); }
-}
-
-/* ===== ГОРЯЩИЕ СВЕЧИ ПО УГЛАМ ===== */
-.candle-left {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 30px;
-    height: 80px;
-    background: linear-gradient(0deg, #8B4513 0%, #A0522D 50%, #FFD700 80%);
-    border-radius: 5px 5px 0 0;
-    filter: blur(2px);
-    opacity: 0.4;
-    animation: candle-flicker 2s infinite;
-    z-index: 3;
-}
-
-.candle-right {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 30px;
-    height: 80px;
-    background: linear-gradient(0deg, #8B4513 0%, #A0522D 50%, #FFD700 80%);
-    border-radius: 5px 5px 0 0;
-    filter: blur(2px);
-    opacity: 0.4;
-    animation: candle-flicker 2.5s infinite;
-    z-index: 3;
-}
-
-.candle-left::after, .candle-right::after {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: 5px;
-    width: 20px;
-    height: 30px;
-    background: radial-gradient(circle, #FFA500 0%, transparent 70%);
-    filter: blur(5px);
-    animation: flame 1s infinite;
-}
-
-@keyframes candle-flicker {
-    0%, 100% { opacity: 0.4; transform: scaleY(1); }
-    50% { opacity: 0.7; transform: scaleY(1.1); }
-}
-
-@keyframes flame {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.3); opacity: 0.8; }
-}
-
-/* ===== ДЕМОНИЧЕСКИЕ СИМВОЛЫ ===== */
-.demonic-symbols {
-    position: fixed;
-    inset: 0;
-    background-image: 
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><text x="10" y="20" fill="red" font-size="30">⛧</text><text x="80" y="80" fill="red" font-size="40">⛧</text><text x="30" y="90" fill="red" font-size="25">⛧</text><text x="70" y="15" fill="red" font-size="35">⛧</text><text x="50" y="50" fill="red" font-size="50" font-family="Rubik Glitch">❤️</text></svg>');
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0.2;
-    animation: symbols-rotate 40s linear infinite;
-}
-
-@keyframes symbols-rotate {
-    0% { transform: rotate(0deg) scale(1); }
-    100% { transform: rotate(360deg) scale(1); }
-}
-
-/* ===== ОГНЕННЫЕ ЧАСТИЦЫ ===== */
-.fire-particles {
-    position: fixed;
-    inset: 0;
-    background: 
-        radial-gradient(circle at 20% 30%, rgba(255, 100, 0, 0.1) 0%, transparent 20%),
-        radial-gradient(circle at 80% 60%, rgba(255, 50, 0, 0.1) 0%, transparent 25%),
-        radial-gradient(circle at 40% 80%, rgba(200, 0, 0, 0.1) 0%, transparent 30%),
-        radial-gradient(circle at 90% 15%, rgba(255, 150, 0, 0.1) 0%, transparent 22%);
-    pointer-events: none;
-    z-index: 1;
-    mix-blend-mode: screen;
-    animation: fire-move 15s infinite;
-}
-
-@keyframes fire-move {
-    0%, 100% { background-position: 0 0; }
-    33% { background-position: 10px 20px; }
-    66% { background-position: -10px -10px; }
 }
 
 /* ===== ВЫЦВЕТШИЕ ПЯТНА ===== */
@@ -251,10 +47,10 @@ body::before {
   position:fixed;
   inset:0;
   background: 
-    radial-gradient(circle at 20% 30%, rgba(150, 50, 50, 0.15) 0%, transparent 30%),
-    radial-gradient(circle at 80% 70%, rgba(100, 30, 30, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 40% 80%, rgba(120, 40, 40, 0.1) 0%, transparent 35%),
-    radial-gradient(circle at 90% 20%, rgba(80, 20, 20, 0.1) 0%, transparent 45%);
+    radial-gradient(circle at 20% 30%, rgba(150, 180, 150, 0.15) 0%, transparent 30%),
+    radial-gradient(circle at 80% 70%, rgba(100, 150, 130, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 40% 80%, rgba(120, 140, 110, 0.1) 0%, transparent 35%),
+    radial-gradient(circle at 90% 20%, rgba(80, 120, 100, 0.1) 0%, transparent 45%);
   pointer-events:none;
   z-index:1;
   mix-blend-mode: overlay;
@@ -266,18 +62,18 @@ body::before {
   inset:0;
   background: repeating-linear-gradient(
       0deg,
-      rgba(150, 50, 50, 0.03) 0px,
-      rgba(80, 20, 20, 0.1) 2px,
+      rgba(100, 140, 130, 0.03) 0px,
+      rgba(20, 40, 30, 0.1) 2px,
       transparent 2px,
       transparent 6px
     ),
     repeating-linear-gradient(
       90deg,
-      rgba(130, 40, 40, 0.03) 0px,
+      rgba(80, 120, 100, 0.03) 0px,
       transparent 4px,
       transparent 8px
     );
-  opacity:0.6;
+  opacity:0.5;
   pointer-events:none;
   z-index:3;
   mix-blend-mode: overlay;
@@ -289,6 +85,24 @@ body::before {
   100% { background-position: 0 20px; }
 }
 
+/* ===== ТУМАН ===== */
+.fog{
+  position:fixed;
+  inset:-50%;
+  background:radial-gradient(circle at 30% 50%, rgba(60, 100, 90, 0.25), transparent 70%);
+  animation:fogMove 30s linear infinite;
+  pointer-events:none;
+  z-index:1;
+}
+
+@keyframes fogMove{
+  0%{transform:translate(0,0) scale(1); opacity:0.3;}
+  25%{transform:translate(-3%,2%) scale(1.1); opacity:0.5;}
+  50%{transform:translate(2%,-3%) scale(0.95); opacity:0.3;}
+  75%{transform:translate(-2%,-1%) scale(1.05); opacity:0.4;}
+  100%{transform:translate(0,0) scale(1); opacity:0.3;}
+}
+
 /* ===== ЧАСТИЦЫ ===== */
 #particleCanvas{
   position:fixed;
@@ -297,15 +111,242 @@ body::before {
   z-index:0;
 }
 
+/* ===== ДЕМОНИЧЕСКИЙ ОГОНЬ (ЗАМЕТНЫЙ) ===== */
+.demonic-fire {
+    position: fixed;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 30% 70%, rgba(255, 80, 0, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 70% 30%, rgba(255, 40, 0, 0.35) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(255, 120, 0, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 20% 20%, rgba(200, 50, 0, 0.3) 0%, transparent 35%);
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+    animation: fire-flicker 4s ease-in-out infinite;
+}
+
+@keyframes fire-flicker {
+    0%, 100% { opacity: 0.7; }
+    33% { opacity: 1; transform: scale(1.02); }
+    66% { opacity: 0.5; transform: scale(0.98); }
+}
+
+/* ===== ЛАВА ВНИЗУ (ЗАМЕТНАЯ) ===== */
+.lava-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(0deg, 
+        rgba(255, 100, 0, 0.5) 0%,
+        rgba(200, 50, 0, 0.3) 30%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+    animation: lava-flow 6s ease-in-out infinite;
+}
+
+@keyframes lava-flow {
+    0%, 100% { opacity: 0.6; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-15px); }
+}
+
+/* ===== НЕОНОВЫЕ ПЕНТАГРАММЫ (ЯРКИЕ) ===== */
+.pentagram-glow {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    top: 10%;
+    left: 5%;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.4) 0%, transparent 60%);
+    filter: blur(30px);
+    pointer-events: none;
+    z-index: 1;
+    animation: pentagram-pulse 3s infinite;
+}
+
+.pentagram-glow2 {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    bottom: 5%;
+    right: 5%;
+    background: radial-gradient(circle, rgba(200, 30, 0, 0.4) 0%, transparent 60%);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: 1;
+    animation: pentagram-pulse 4s infinite reverse;
+}
+
+@keyframes pentagram-pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* ===== КРОВАВЫЕ ПОДТЕКИ (ЗАМЕТНЫЕ) ===== */
+.blood-drips {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: repeating-linear-gradient(
+        180deg,
+        transparent 0px,
+        transparent 25px,
+        rgba(180, 0, 0, 0.25) 25px,
+        rgba(180, 0, 0, 0.25) 30px,
+        transparent 30px,
+        transparent 50px
+    );
+    pointer-events: none;
+    z-index: 2;
+    animation: drip 6s linear infinite;
+}
+
+@keyframes drip {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 80px; }
+}
+
+/* ===== ДЕМОНИЧЕСКИЕ ЦЕПИ ===== */
+.chains {
+    position: fixed;
+    inset: 0;
+    background: 
+        repeating-linear-gradient(45deg, 
+            transparent 0px,
+            transparent 30px,
+            rgba(180, 60, 60, 0.25) 30px,
+            rgba(180, 60, 60, 0.25) 34px,
+            transparent 34px,
+            transparent 70px
+        ),
+        repeating-linear-gradient(135deg, 
+            transparent 0px,
+            transparent 30px,
+            rgba(180, 60, 60, 0.25) 30px,
+            rgba(180, 60, 60, 0.25) 34px,
+            transparent 34px,
+            transparent 70px
+        );
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+    animation: chains-rattle 8s infinite;
+}
+
+@keyframes chains-rattle {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(3px, -2px) rotate(0.8deg); }
+    75% { transform: translate(-2px, 3px) rotate(-0.8deg); }
+}
+
+/* ===== ДЕМОНИЧЕСКИЕ СИМВОЛЫ (ЯРКИЕ) ===== */
+.demonic-symbols {
+    position: fixed;
+    inset: 0;
+    background-image: 
+        repeating-linear-gradient(0deg, 
+            transparent 0px,
+            transparent 120px,
+            rgba(255, 0, 0, 0.15) 120px,
+            rgba(255, 0, 0, 0.15) 122px
+        ),
+        repeating-linear-gradient(90deg, 
+            transparent 0px,
+            transparent 120px,
+            rgba(255, 0, 0, 0.15) 120px,
+            rgba(255, 0, 0, 0.15) 122px
+        );
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.8;
+}
+
+/* ===== ОГНЕННЫЕ ЧАСТИЦЫ ===== */
+.fire-particles {
+    position: fixed;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 15% 25%, rgba(255, 100, 0, 0.2) 0%, transparent 15%),
+        radial-gradient(circle at 85% 65%, rgba(255, 60, 0, 0.2) 0%, transparent 20%),
+        radial-gradient(circle at 45% 85%, rgba(200, 30, 0, 0.2) 0%, transparent 25%),
+        radial-gradient(circle at 75% 15%, rgba(255, 150, 0, 0.2) 0%, transparent 18%);
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
+    animation: fire-move 10s infinite;
+}
+
+@keyframes fire-move {
+    0%, 100% { background-position: 0 0; }
+    33% { background-position: 15px 25px; }
+    66% { background-position: -15px -15px; }
+}
+
+/* ===== СВЕЧИ ===== */
+.candle-left {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 30px;
+    height: 100px;
+    background: linear-gradient(0deg, #8B4513 0%, #A0522D 60%, #FFD700 90%);
+    border-radius: 5px 5px 0 0;
+    opacity: 0.7;
+    animation: candle-flicker 2s infinite;
+    z-index: 10;
+}
+
+.candle-right {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 100px;
+    background: linear-gradient(0deg, #8B4513 0%, #A0522D 60%, #FFD700 90%);
+    border-radius: 5px 5px 0 0;
+    opacity: 0.7;
+    animation: candle-flicker 2.5s infinite;
+    z-index: 10;
+}
+
+.candle-left::after, .candle-right::after {
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: 5px;
+    width: 20px;
+    height: 35px;
+    background: radial-gradient(circle, #FF8C00 0%, #FF4500 50%, transparent 80%);
+    filter: blur(5px);
+    animation: flame 1s infinite;
+}
+
+@keyframes candle-flicker {
+    0%, 100% { opacity: 0.6; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.15); }
+}
+
+@keyframes flame {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.4); opacity: 1; }
+}
+
 /* ===== НАВИГАЦИЯ ===== */
 nav{
-  background: rgba(30, 10, 10, 0.8);
-  backdrop-filter: blur(5px);
+  background: rgba(20, 35, 30, 0.7);
+  backdrop-filter: blur(3px);
   position:sticky;
   top:0;
-  z-index:10;
-  border-bottom:2px solid #b03030;
-  box-shadow: 0 5px 20px rgba(200, 0, 0, 0.3);
+  z-index:20;
+  border-bottom:2px solid #5a8a7a;
+  box-shadow: 0 5px 15px rgba(0, 30, 20, 0.5);
 }
 nav ul{
   display:flex;
@@ -319,37 +360,37 @@ nav a{
   padding:18px 0;
   display:block;
   cursor:pointer;
-  color:#f0a0a0;
+  color:#a0d8c0;
   text-transform:uppercase;
   font-size:14px;
   letter-spacing:2px;
   transition:0.2s;
   position:relative;
-  text-shadow: 0 0 8px rgba(200, 0, 0, 0.5);
+  text-shadow: 0 0 5px rgba(0, 200, 150, 0.3);
   font-family: 'Rubik Glitch', 'PT Mono', monospace;
   transform: skew(-2deg);
 }
 
 nav a.active{
-  color:#ff8080;
+  color:#70ffd0;
   text-shadow:
-    0 0 15px #ff0000,
-    0 0 25px #cc0000,
-    0 0 35px #990000;
+    0 0 10px #00ccaa,
+    0 0 20px #009977,
+    0 0 30px #006655;
   transform:scale(1.1) skew(-2deg);
 }
 
 nav a:hover{
   animation: glitch-text 0.2s infinite;
-  color:#ffa0a0;
+  color:#90ffe0;
 }
 
 @keyframes glitch-text {
-  0% { transform: translate(0) skew(-2deg); text-shadow: 2px 0 0 #ff4040, -2px 0 0 #40ffff; }
-  20% { transform: translate(-1px, 1px) skew(-2deg); text-shadow: 1px 0 0 #ff4040, -1px 0 0 #40ffff; }
-  40% { transform: translate(1px, -1px) skew(-2deg); text-shadow: -1px 0 0 #ff4040, 1px 0 0 #40ffff; }
-  60% { transform: translate(-1px, -1px) skew(-2deg); text-shadow: 2px 0 0 #ff4040, -2px 0 0 #40ffff; }
-  80% { transform: translate(1px, 1px) skew(-2deg); text-shadow: -2px 0 0 #ff4040, 2px 0 0 #40ffff; }
+  0% { transform: translate(0) skew(-2deg); text-shadow: 2px 0 0 #70ffd0, -2px 0 0 #ff70a0; }
+  20% { transform: translate(-1px, 1px) skew(-2deg); text-shadow: 1px 0 0 #70ffd0, -1px 0 0 #ff70a0; }
+  40% { transform: translate(1px, -1px) skew(-2deg); text-shadow: -1px 0 0 #70ffd0, 1px 0 0 #ff70a0; }
+  60% { transform: translate(-1px, -1px) skew(-2deg); text-shadow: 2px 0 0 #70ffd0, -2px 0 0 #ff70a0; }
+  80% { transform: translate(1px, 1px) skew(-2deg); text-shadow: -2px 0 0 #70ffd0, 2px 0 0 #ff70a0; }
   100% { transform: translate(0) skew(-2deg); text-shadow: 0 0 0 transparent; }
 }
 
@@ -362,7 +403,7 @@ section{
   transition:0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position:relative;
   z-index:5;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(1px);
 }
 section.active{
   display:block;
@@ -376,28 +417,28 @@ section.active{
 h1, h2{
   font-family: 'Rubik Glitch', 'UnifrakturMaguntia', 'PT Mono', monospace;
   text-shadow:
-    0 0 15px #ff4040,
-    0 0 25px #cc0000,
-    0 0 35px #990000,
-    4px 4px 0 #2a0000,
-    6px 6px 0 #1a0000;
-  letter-spacing:5px;
-  color:#ffa0a0;
-  animation: demonic-pulse 3s infinite;
-  transform: skew(-4deg);
+    0 0 10px #30c0b0,
+    0 0 20px #209080,
+    0 0 30px #106050,
+    3px 3px 0 #103030,
+    5px 5px 0 #082020;
+  letter-spacing:4px;
+  color:#b0f0e0;
+  animation: neon-pulse 4s infinite;
+  transform: skew(-3deg);
   text-transform: uppercase;
 }
 
-@keyframes demonic-pulse {
-  0%, 100% { text-shadow: 0 0 15px #ff4040, 0 0 25px #cc0000, 0 0 35px #990000; }
-  50% { text-shadow: 0 0 25px #ff6060, 0 0 35px #ff0000, 0 0 50px #cc0000; }
+@keyframes neon-pulse {
+  0%, 100% { text-shadow: 0 0 10px #30c0b0, 0 0 20px #209080, 0 0 30px #106050; }
+  50% { text-shadow: 0 0 15px #50e0d0, 0 0 30px #30b0a0, 0 0 45px #108070; }
 }
 
 /* ===== GLITCH ===== */
 .glitch{
   position:relative;
   font-size:3em;
-  color:#ffa0a0;
+  color:#80e0d0;
   animation:flicker 5s infinite;
   text-transform:uppercase;
   font-family: 'Rubik Glitch', 'UnifrakturMaguntia', monospace;
@@ -413,25 +454,48 @@ h1, h2{
 }
 
 .glitch::before{
-  color:#ff0000;
+  color:#ff70a0;
   animation:glitchTop 2.2s infinite linear alternate-reverse;
-  opacity:0.7;
+  opacity:0.6;
 }
 
 .glitch::after{
-  color:#00ffff;
+  color:#70ffd0;
   animation:glitchBottom 1.8s infinite linear alternate-reverse;
-  opacity:0.7;
+  opacity:0.6;
+}
+
+@keyframes glitchTop{
+  0%{clip-path:inset(0 0 85% 0);transform:translate(-4px,-3px) skew(-4deg);}
+  20%{clip-path:inset(15% 0 70% 0);transform:translate(4px,3px) skew(-4deg);}
+  40%{clip-path:inset(30% 0 55% 0);transform:translate(-5px,2px) skew(-4deg);}
+  60%{clip-path:inset(45% 0 40% 0);transform:translate(5px,-3px) skew(-4deg);}
+  80%{clip-path:inset(60% 0 25% 0);transform:translate(-3px,4px) skew(-4deg);}
+  100%{clip-path:inset(75% 0 10% 0);transform:translate(3px,-4px) skew(-4deg);}
+}
+
+@keyframes glitchBottom{
+  0%{clip-path:inset(85% 0 0 0);transform:translate(4px,3px) skew(-4deg);}
+  20%{clip-path:inset(70% 0 15% 0);transform:translate(-4px,-3px) skew(-4deg);}
+  40%{clip-path:inset(55% 0 30% 0);transform:translate(5px,-2px) skew(-4deg);}
+  60%{clip-path:inset(40% 0 45% 0);transform:translate(-5px,3px) skew(-4deg);}
+  80%{clip-path:inset(25% 0 60% 0);transform:translate(3px,-4px) skew(-4deg);}
+  100%{clip-path:inset(10% 0 75% 0);transform:translate(-3px,4px) skew(-4deg);}
+}
+
+@keyframes flicker{
+  0%,19%,22%,24%,55%,57%,100%{opacity:1;}
+  20%,23%,56%{opacity:0.7;}
 }
 
 /* ===== ГЛАВНАЯ ===== */
 #home{
   text-align:center;
   background:
-  linear-gradient(145deg, rgba(30, 5, 5, 0.85) 0%, rgba(50, 10, 10, 0.9) 100%),
-  url("https://www.transparenttextures.com/patterns/dark-mosaic.png");
-  border-bottom:2px solid #b03030;
-  border-top:2px solid #b03030;
+  linear-gradient(145deg, rgba(10, 30, 25, 0.8) 0%, rgba(20, 40, 30, 0.9) 100%),
+  url("https://www.transparenttextures.com/patterns/old-wall.png");
+  border-bottom:2px solid #3a6a5a;
+  border-top:2px solid #3a6a5a;
   position:relative;
   overflow:hidden;
 }
@@ -439,16 +503,16 @@ h1, h2{
 #home p{
   font-size:16px;
   line-height:1.8;
-  color:#f0c0c0;
+  color:#b0e0d0;
   max-width:800px;
   margin:30px auto;
   padding:20px;
-  background:rgba(40, 10, 10, 0.6);
-  border-left:4px solid #ff4040;
-  backdrop-filter: blur(4px);
+  background:rgba(10, 25, 20, 0.6);
+  border-left:4px solid #40c0b0;
+  backdrop-filter: blur(3px);
   transform: skew(-1deg);
   font-family: 'PT Mono', monospace;
-  box-shadow: -5px 5px 20px rgba(0,0,0,0.5);
+  box-shadow: -5px 5px 10px rgba(0,0,0,0.3);
 }
 
 /* ===== ПСЕВДОРУНЫ ===== */
@@ -459,78 +523,85 @@ h1, h2{
 
 #runes {
     font-size: 48px;
-    color: #ffa0a0;
+    color: #90ffc0;
     text-shadow: 
-        0 0 15px #ff4040,
-        0 0 30px #cc0000,
-        0 0 45px #990000;
+        0 0 15px #30c0a0,
+        0 0 30px #209070,
+        0 0 45px #106050;
     display: none;
-    background: rgba(40, 10, 10, 0.6);
+    background: rgba(10, 30, 20, 0.5);
     padding: 25px 40px;
-    border: 2px solid #ff4040;
+    border: 2px solid #30a080;
     border-radius: 0;
     letter-spacing: 8px;
     max-width: 80%;
     margin: 0 auto;
     animation: rune-pulse 2s infinite alternate;
     word-wrap: break-word;
-    box-shadow: 0 0 50px rgba(200, 0, 0, 0.5), inset 0 0 30px rgba(0,0,0,0.8);
-    backdrop-filter: blur(4px);
+    box-shadow: 0 0 40px rgba(0, 150, 120, 0.4), inset 0 0 20px rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px);
     transform: skew(-2deg);
     font-family: 'Rubik Glitch', monospace;
 }
 
 @keyframes rune-pulse {
     from { 
-        text-shadow: 0 0 15px #ff4040, 0 0 30px #cc0000;
+        text-shadow: 0 0 15px #30c0a0, 0 0 30px #209070;
         opacity: 0.9;
     }
     to { 
-        text-shadow: 0 0 25px #ff8080, 0 0 50px #ff0000, 0 0 70px #cc0000;
+        text-shadow: 0 0 25px #70ffc0, 0 0 50px #30c0a0, 0 0 70px #108070;
         opacity: 1;
     }
 }
 
 .rune-btn {
     margin: 30px 0 20px;
-    background: #2a0a0a;
-    border: 3px solid #ff4040;
-    color: #ffc0c0;
+    background: #103830;
+    border: 3px solid #30a080;
+    color: #c0ffd0;
     padding: 18px 36px;
     font-size: 18px;
     font-weight: bold;
     font-family: 'Rubik Glitch', 'PT Mono', monospace;
     cursor: pointer;
     box-shadow: 
-        8px 8px 0 #1a0000,
-        0 0 25px rgba(200, 0, 0, 0.6),
-        inset 0 -5px 0 #1a0000;
+        8px 8px 0 #082018,
+        0 0 20px rgba(0, 200, 150, 0.5),
+        inset 0 -5px 0 #082018;
     transition: all 0.1s ease;
     text-transform: uppercase;
     letter-spacing: 3px;
     transform: skew(-3deg);
     position: relative;
+    z-index: 15;
 }
 
 .rune-btn::before {
     content: "⛧";
     position: absolute;
-    top: -15px;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 24px;
-    opacity: 0.7;
+    font-size: 28px;
+    opacity: 0.9;
     color: #ff4040;
-    text-shadow: 0 0 15px #ff0000;
+    text-shadow: 0 0 20px #ff0000;
+    animation: symbol-glow 2s infinite;
+}
+
+@keyframes symbol-glow {
+    0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.3); }
 }
 
 .rune-btn:hover {
     transform: translate(4px, 4px) skew(-3deg);
     box-shadow: 
-        4px 4px 0 #1a0000,
-        0 0 35px #ff6060,
-        inset 0 -3px 0 #1a0000;
-    background: #3a1515;
+        4px 4px 0 #082018,
+        0 0 30px #30ffc0,
+        inset 0 -3px 0 #082018;
+    background: #205040;
 }
 
 /* ===== МУЗЫКА ===== */
@@ -561,14 +632,13 @@ h1, h2{
 .cover-image {
     width: 120px;
     height: 120px;
-    border: 1px solid #ff4040;
+    border: 1px solid #308070;
     background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     transform: skew(-1deg);
-    box-shadow: 0 0 25px rgba(200, 0, 0, 0.4);
 }
 
 .cover-image img {
@@ -580,18 +650,18 @@ h1, h2{
 
 .track-title {
     font-size: 20px;
-    color: #ffc0c0;
+    color: #a0e8d0;
     margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 3px;
-    text-shadow: 3px 3px 0 #2a0a0a, 0 0 20px #ff4040;
+    text-shadow: 3px 3px 0 #103030, 0 0 15px #30b0a0;
     font-family: 'Rubik Glitch', monospace;
     transform: skew(-2deg);
 }
 
 .track-meta {
     font-size: 11px;
-    color: #b08080;
+    color: #80b8a0;
     line-height: 2;
 }
 
@@ -601,7 +671,7 @@ h1, h2{
 
 .visualization {
     height: 45px;
-    background: #1a0000;
+    background: #082018;
     margin: 20px 0;
     border: none;
     display: flex;
@@ -609,7 +679,7 @@ h1, h2{
     justify-content: center;
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 0 20px #000, 0 0 25px rgba(200, 0, 0, 0.4);
+    box-shadow: inset 0 0 15px #000;
 }
 
 .visualization canvas {
@@ -622,23 +692,23 @@ audio {
     font-family: 'Arial', 'Helvetica', sans-serif !important;
     width: 100%;
     margin: 10px 0;
-    background: #1a0000;
+    background: #103020;
     border: none;
-    filter: sepia(30%) hue-rotate(320deg) saturate(250%);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+    filter: sepia(30%) hue-rotate(150deg) saturate(150%);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
 .download-btn {
     display: inline-block;
     margin-top: 15px;
     padding: 12px 24px;
-    background: #1a0000;
-    border: 1px solid #ff4040;
-    color: #ffc0c0;
+    background: #103020;
+    border: 1px solid #308070;
+    color: #b0f0d0;
     text-decoration: none;
     font-size: 12px;
     letter-spacing: 2px;
-    box-shadow: 5px 5px 0 #0f0000;
+    box-shadow: 5px 5px 0 #082018;
     transition: 0.1s;
     font-family: 'Rubik Glitch', monospace;
     transform: skew(-2deg);
@@ -646,8 +716,8 @@ audio {
 
 .download-btn:hover {
     transform: translate(3px, 3px) skew(-2deg);
-    box-shadow: 2px 2px 0 #0f0000;
-    background: #2a0a0a;
+    box-shadow: 2px 2px 0 #082018;
+    background: #205040;
 }
 
 /* ===== ФОРМА ===== */
@@ -655,10 +725,10 @@ input,textarea{
   width:100%;
   padding:12px;
   margin-bottom:15px;
-  background:rgba(30, 5, 5, 0.7);
-  backdrop-filter: blur(3px);
-  border:2px solid #ff4040;
-  color:#f0c0c0;
+  background:rgba(10, 30, 20, 0.7);
+  backdrop-filter: blur(2px);
+  border:2px solid #308070;
+  color:#b0e0d0;
   font-family:'PT Mono', monospace;
   font-size:14px;
   box-shadow: inset 0 0 10px #000;
@@ -667,19 +737,19 @@ input,textarea{
 
 input:focus,textarea:focus{
   outline:none;
-  border-color:#ff8080;
-  box-shadow: inset 0 0 10px #000, 0 0 25px #ff4040;
+  border-color:#50d0b0;
+  box-shadow: inset 0 0 10px #000, 0 0 25px #30ffc0;
 }
 
 button{
   padding:15px 30px;
-  background:#2a0a0a;
-  border:3px solid #ff4040;
-  color:#ffc0c0;
+  background:#103830;
+  border:3px solid #308070;
+  color:#c0ffd0;
   font-family:'Rubik Glitch', monospace;
   font-size:16px;
   cursor:pointer;
-  box-shadow:7px 7px 0 #1a0000;
+  box-shadow:7px 7px 0 #082018;
   transition:0.1s;
   text-transform:uppercase;
   letter-spacing:2px;
@@ -688,51 +758,67 @@ button{
 
 button:hover{
   transform:translate(4px,4px) skew(-2deg);
-  box-shadow:3px 3px 0 #1a0000;
-  background:#3a1515;
+  box-shadow:3px 3px 0 #082018;
+  background:#205040;
+}
+
+button:active{
+  transform:translate(7px,7px) skew(-2deg);
+  box-shadow:0px 0px 0 #082018;
 }
 
 footer{
   text-align:center;
   padding:20px;
-  background:rgba(20, 5, 5, 0.8);
-  backdrop-filter: blur(5px);
-  border-top:2px solid #b03030;
-  color:#b08080;
+  background:rgba(10, 25, 20, 0.7);
+  backdrop-filter: blur(3px);
+  border-top:2px solid #3a6a5a;
+  color:#80b8a0;
   font-size:12px;
   letter-spacing:2px;
   transform: skew(-1deg);
   font-family: 'PT Mono', monospace;
   position: relative;
+  z-index: 15;
 }
 
 footer::before {
   content: "⛧ ⚔️ ❤️ ⚔️ ⛧";
   position: absolute;
-  top: -20px;
+  top: -25px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 16px;
-  color: rgba(200, 50, 50, 0.5);
-  text-shadow: 0 0 15px #ff0000;
+  font-size: 20px;
+  color: rgba(200, 80, 80, 0.8);
+  text-shadow: 0 0 20px #ff4040;
+  animation: footer-glow 3s infinite;
+}
+
+@keyframes footer-glow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
 }
 
 </style>
 </head>
 <body>
 
-<!-- ДЕМОНИЧЕСКИЕ ЭЛЕМЕНТЫ -->
-<div class="pentagrams"></div>
-<div class="chains"></div>
+<!-- ДЕМОНИЧЕСКИЕ ЭЛЕМЕНТЫ (ВСЕ ЗАМЕТНЫЕ) -->
+<div class="demonic-fire"></div>
+<div class="lava-bottom"></div>
+<div class="pentagram-glow"></div>
+<div class="pentagram-glow2"></div>
 <div class="blood-drips"></div>
-<div class="neon-pentagram"></div>
-<div class="neon-pentagram2"></div>
+<div class="chains"></div>
 <div class="demonic-symbols"></div>
 <div class="fire-particles"></div>
 <div class="candle-left"></div>
 <div class="candle-right"></div>
+
+<!-- ОСНОВНЫЕ ЭЛЕМЕНТЫ ДК -->
 <div class="fade-spots"></div>
 <div class="scanlines"></div>
+<div class="fog"></div>
 <canvas id="particleCanvas"></canvas>
 
 <nav>
@@ -774,13 +860,13 @@ footer::before {
     <div class="vinyl-player">
         <div class="cover-block">
             <div class="cover-image">
-                <img src="обложка песни Тише.jpg" alt="Тише…-41">
+                <img src="обложка песни Тише.jpg" alt="Тише">
             </div>
             <div class="track-info">
-                <div class="track-title">ТИШЕ... -41</div>
+                <div class="track-title">ТИШЕ</div>
                 <div class="track-meta">
                     <div>⏱️ 2026</div>
-                    <div>🔊 WAV / 44.1kHz</div>
+                    <div>🔊 MP3</div>
                     <div>📷 DemonSon</div>
                 </div>
             </div>
@@ -791,11 +877,11 @@ footer::before {
         </div>
         
         <audio id="audioPlayer" controls preload="metadata">
-            <source src="Тише…-41.wav" type="audio/wav">
+            <source src="Тише.mp3" type="audio/mpeg">
             Ваш браузер не поддерживает аудио.
         </audio>
         
-        <a href="Тише…-41.wav" download class="download-btn">⬇ СКАТЧАТЬ ТРЕК</a>
+        <a href="Тише.mp3" download class="download-btn">⬇ СКАТЧАТЬ ТРЕК</a>
     </div>
 </div>
 
@@ -814,7 +900,7 @@ footer::before {
 </div>
 </section>
 
-<footer>© 2026 DemonSon • ЗАПИСЬ С ПЛЁНКИ • СИГНАЛ ШУМА</footer>
+<footer>© 2026 DemonSon</footer>
 
 <script>
 // Вкладки
@@ -834,15 +920,15 @@ canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 const particles=[];
-for(let i=0;i<200;i++){
+for(let i=0;i<150;i++){
   particles.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
     r:Math.random()*5+1,
-    dx:(Math.random()-0.5)*0.3,
-    dy:(Math.random()-0.5)*0.3,
-    alpha:Math.random()*0.7 + 0.2,
-    color:Math.random() > 0.3 ? 'rgba(200,0,0,' : 'rgba(150,0,0,'
+    dx:(Math.random()-0.5)*0.25,
+    dy:(Math.random()-0.5)*0.25,
+    alpha:Math.random()*0.6 + 0.2,
+    color:Math.random() > 0.5 ? 'rgba(200,80,0,' : 'rgba(150,40,0,'
   });
 }
 
@@ -892,7 +978,7 @@ if (audio && visualizer) {
             analyser.getByteFrequencyData(dataArray);
             
             vizCtx.clearRect(0, 0, visualizer.width, visualizer.height);
-            vizCtx.fillStyle = '#1a0000';
+            vizCtx.fillStyle = '#082018';
             vizCtx.fillRect(0, 0, visualizer.width, visualizer.height);
             
             const barWidth = (visualizer.width / bufferLength) * 2.5;
@@ -900,8 +986,8 @@ if (audio && visualizer) {
             
             for (let i = 0; i < bufferLength; i++) {
                 const barHeight = (dataArray[i] / 255) * visualizer.height;
-                const hue = 0 + (barHeight / visualizer.height) * 20;
-                vizCtx.fillStyle = `hsl(${hue}, 100%, 60%)`;
+                const hue = 150 + (barHeight / visualizer.height) * 30;
+                vizCtx.fillStyle = `hsl(${hue}, 80%, 60%)`;
                 vizCtx.fillRect(x, visualizer.height - barHeight, barWidth, barHeight);
                 x += barWidth + 1;
             }
@@ -912,13 +998,13 @@ if (audio && visualizer) {
 
 // Случайные помехи
 setInterval(() => {
-  if(Math.random() > 0.6) {
-    document.body.style.transform = `skew(${Math.random() * 1}deg, 0deg)`;
+  if(Math.random() > 0.7) {
+    document.body.style.transform = `skew(${Math.random() * 0.8}deg, 0deg)`;
     setTimeout(() => {
       document.body.style.transform = '';
-    }, 150);
+    }, 120);
   }
-}, 3000);
+}, 4000);
 
 // Активация рун
 function activateRunes() {
@@ -929,7 +1015,7 @@ function activateRunes() {
     const btn = document.querySelector('.rune-btn');
     if(btn) {
         btn.style.transform = 'translate(4px, 4px) skew(-3deg)';
-        btn.style.boxShadow = '4px 4px 0 #1a0000';
+        btn.style.boxShadow = '4px 4px 0 #082018';
     }
 
     setTimeout(() => {
