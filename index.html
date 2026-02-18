@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DemonSon - DEMONIC LOVE</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== БАЗА ===== */
+body{
+  margin:0;
+  font-family:'PT Mono', 'Press Start 2P', monospace;
+  background: #1a0a0a;
+  color:#f0b0b0;
+  overflow-x:hidden;
+  position:relative;
+  min-height:100vh;
+}
+
+/* ===== КРОВАВАЯ ТЕКСТУРА ===== */
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image: 
+    repeating-linear-gradient(45deg, 
+      rgba(180, 20, 20, 0.03) 0px,
+      rgba(100, 10, 10, 0.04) 2px,
+      transparent 2px,
+      transparent 8px
+    ),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.1"/></svg>');
+  opacity:0.5;
+  pointer-events:none;
+  z-index:2;
+  mix-blend-mode: multiply;
+}
+
+/* ===== ПЕНТАГРАММЫ ===== */
+.pentagrams {
+    position: fixed;
+    inset: 0;
+    background-image: 
+        repeating-linear-gradient(0deg, 
+            transparent 0px,
+            transparent 150px,
+            rgba(200, 0, 0, 0.02) 150px,
+            rgba(200, 0, 0, 0.02) 152px
+        ),
+        repeating-linear-gradient(90deg, 
+            transparent 0px,
+            transparent 150px,
+            rgba(200, 0, 0, 0.02) 150px,
+            rgba(200, 0, 0, 0.02) 152px
+        );
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+/* ===== ДЕМОНИЧЕСКИЕ ЦЕПИ ===== */
+.chains {
+    position: fixed;
+    inset: 0;
+    background: 
+        repeating-linear-gradient(45deg, 
+            transparent 0px,
+            transparent 30px,
+            rgba(150, 50, 50, 0.1) 30px,
+            rgba(150, 50, 50, 0.1) 32px,
+            transparent 32px,
+            transparent 60px
+        ),
+        repeating-linear-gradient(135deg, 
+            transparent 0px,
+            transparent 30px,
+            rgba(150, 50, 50, 0.1) 30px,
+            rgba(150, 50, 50, 0.1) 32px,
+            transparent 32px,
+            transparent 60px
+        );
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+    animation: chains-rattle 10s infinite;
+}
+
+@keyframes chains-rattle {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(2px, -1px) rotate(0.5deg); }
+    75% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+}
+
+/* ===== КРОВАВЫЕ ПОДТЕКИ ===== */
+.blood-drips {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: repeating-linear-gradient(
+        180deg,
+        transparent 0px,
+        transparent 30px,
+        rgba(180, 0, 0, 0.1) 30px,
+        rgba(180, 0, 0, 0.1) 35px,
+        transparent 35px,
+        transparent 60px
+    );
+    pointer-events: none;
+    z-index: 2;
+    animation: drip 8s linear infinite;
+}
+
+@keyframes drip {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 50px; }
+}
+
+/* ===== НЕОНОВЫЕ ПЕНТАГРАММЫ ===== */
+.neon-pentagram {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    top: 20%;
+    left: 10%;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.2) 0%, transparent 70%);
+    filter: blur(20px);
+    pointer-events: none;
+    z-index: 1;
+    animation: neon-glow 4s infinite;
+}
+
+.neon-pentagram2 {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    bottom: 10%;
+    right: 5%;
+    background: radial-gradient(circle, rgba(255, 50, 0, 0.15) 0%, transparent 70%);
+    filter: blur(30px);
+    pointer-events: none;
+    z-index: 1;
+    animation: neon-glow 6s infinite reverse;
+}
+
+@keyframes neon-glow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.2); }
+}
+
+/* ===== ГОРЯЩИЕ СВЕЧИ ПО УГЛАМ ===== */
+.candle-left {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 30px;
+    height: 80px;
+    background: linear-gradient(0deg, #8B4513 0%, #A0522D 50%, #FFD700 80%);
+    border-radius: 5px 5px 0 0;
+    filter: blur(2px);
+    opacity: 0.4;
+    animation: candle-flicker 2s infinite;
+    z-index: 3;
+}
+
+.candle-right {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 80px;
+    background: linear-gradient(0deg, #8B4513 0%, #A0522D 50%, #FFD700 80%);
+    border-radius: 5px 5px 0 0;
+    filter: blur(2px);
+    opacity: 0.4;
+    animation: candle-flicker 2.5s infinite;
+    z-index: 3;
+}
+
+.candle-left::after, .candle-right::after {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 5px;
+    width: 20px;
+    height: 30px;
+    background: radial-gradient(circle, #FFA500 0%, transparent 70%);
+    filter: blur(5px);
+    animation: flame 1s infinite;
+}
+
+@keyframes candle-flicker {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 0.7; transform: scaleY(1.1); }
+}
+
+@keyframes flame {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.3); opacity: 0.8; }
+}
+
+/* ===== ДЕМОНИЧЕСКИЕ СИМВОЛЫ ===== */
+.demonic-symbols {
+    position: fixed;
+    inset: 0;
+    background-image: 
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><text x="10" y="20" fill="red" font-size="30">⛧</text><text x="80" y="80" fill="red" font-size="40">⛧</text><text x="30" y="90" fill="red" font-size="25">⛧</text><text x="70" y="15" fill="red" font-size="35">⛧</text><text x="50" y="50" fill="red" font-size="50" font-family="Rubik Glitch">❤️</text></svg>');
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.2;
+    animation: symbols-rotate 40s linear infinite;
+}
+
+@keyframes symbols-rotate {
+    0% { transform: rotate(0deg) scale(1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+/* ===== ОГНЕННЫЕ ЧАСТИЦЫ ===== */
+.fire-particles {
+    position: fixed;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 100, 0, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 60%, rgba(255, 50, 0, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at 40% 80%, rgba(200, 0, 0, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 90% 15%, rgba(255, 150, 0, 0.1) 0%, transparent 22%);
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
+    animation: fire-move 15s infinite;
+}
+
+@keyframes fire-move {
+    0%, 100% { background-position: 0 0; }
+    33% { background-position: 10px 20px; }
+    66% { background-position: -10px -10px; }
+}
+
+/* ===== ВЫЦВЕТШИЕ ПЯТНА ===== */
+.fade-spots {
+  position:fixed;
+  inset:0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(150, 50, 50, 0.15) 0%, transparent 30%),
+    radial-gradient(circle at 80% 70%, rgba(100, 30, 30, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 40% 80%, rgba(120, 40, 40, 0.1) 0%, transparent 35%),
+    radial-gradient(circle at 90% 20%, rgba(80, 20, 20, 0.1) 0%, transparent 45%);
+  pointer-events:none;
+  z-index:1;
+  mix-blend-mode: overlay;
+}
+
+/* ===== СТРОКИ РАЗВЁРТКИ ===== */
+.scanlines {
+  position:fixed;
+  inset:0;
+  background: repeating-linear-gradient(
+      0deg,
+      rgba(150, 50, 50, 0.03) 0px,
+      rgba(80, 20, 20, 0.1) 2px,
+      transparent 2px,
+      transparent 6px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(130, 40, 40, 0.03) 0px,
+      transparent 4px,
+      transparent 8px
+    );
+  opacity:0.6;
+  pointer-events:none;
+  z-index:3;
+  mix-blend-mode: overlay;
+  animation: scan 12s linear infinite;
+}
+
+@keyframes scan {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 20px; }
+}
+
+/* ===== ЧАСТИЦЫ ===== */
+#particleCanvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ===== НАВИГАЦИЯ ===== */
+nav{
+  background: rgba(30, 10, 10, 0.8);
+  backdrop-filter: blur(5px);
+  position:sticky;
+  top:0;
+  z-index:10;
+  border-bottom:2px solid #b03030;
+  box-shadow: 0 5px 20px rgba(200, 0, 0, 0.3);
+}
+nav ul{
+  display:flex;
+  justify-content:center;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+nav li{margin:0 20px;}
+nav a{
+  padding:18px 0;
+  display:block;
+  cursor:pointer;
+  color:#f0a0a0;
+  text-transform:uppercase;
+  font-size:14px;
+  letter-spacing:2px;
+  transition:0.2s;
+  position:relative;
+  text-shadow: 0 0 8px rgba(200, 0, 0, 0.5);
+  font-family: 'Rubik Glitch', 'PT Mono', monospace;
+  transform: skew(-2deg);
+}
+
+nav a.active{
+  color:#ff8080;
+  text-shadow:
+    0 0 15px #ff0000,
+    0 0 25px #cc0000,
+    0 0 35px #990000;
+  transform:scale(1.1) skew(-2deg);
+}
+
+nav a:hover{
+  animation: glitch-text 0.2s infinite;
+  color:#ffa0a0;
+}
+
+@keyframes glitch-text {
+  0% { transform: translate(0) skew(-2deg); text-shadow: 2px 0 0 #ff4040, -2px 0 0 #40ffff; }
+  20% { transform: translate(-1px, 1px) skew(-2deg); text-shadow: 1px 0 0 #ff4040, -1px 0 0 #40ffff; }
+  40% { transform: translate(1px, -1px) skew(-2deg); text-shadow: -1px 0 0 #ff4040, 1px 0 0 #40ffff; }
+  60% { transform: translate(-1px, -1px) skew(-2deg); text-shadow: 2px 0 0 #ff4040, -2px 0 0 #40ffff; }
+  80% { transform: translate(1px, 1px) skew(-2deg); text-shadow: -2px 0 0 #ff4040, 2px 0 0 #40ffff; }
+  100% { transform: translate(0) skew(-2deg); text-shadow: 0 0 0 transparent; }
+}
+
+/* ===== СЕКЦИИ ===== */
+section{
+  padding:60px 20px;
+  display:none;
+  opacity:0;
+  transform:translateY(20px) skew(-1deg);
+  transition:0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position:relative;
+  z-index:5;
+  backdrop-filter: blur(2px);
+}
+section.active{
+  display:block;
+  opacity:1;
+  transform:translateY(0) skew(-1deg);
+}
+
+.container{max-width:1100px;margin:auto;}
+
+/* ===== ЗАГОЛОВКИ ===== */
+h1, h2{
+  font-family: 'Rubik Glitch', 'UnifrakturMaguntia', 'PT Mono', monospace;
+  text-shadow:
+    0 0 15px #ff4040,
+    0 0 25px #cc0000,
+    0 0 35px #990000,
+    4px 4px 0 #2a0000,
+    6px 6px 0 #1a0000;
+  letter-spacing:5px;
+  color:#ffa0a0;
+  animation: demonic-pulse 3s infinite;
+  transform: skew(-4deg);
+  text-transform: uppercase;
+}
+
+@keyframes demonic-pulse {
+  0%, 100% { text-shadow: 0 0 15px #ff4040, 0 0 25px #cc0000, 0 0 35px #990000; }
+  50% { text-shadow: 0 0 25px #ff6060, 0 0 35px #ff0000, 0 0 50px #cc0000; }
+}
+
+/* ===== GLITCH ===== */
+.glitch{
+  position:relative;
+  font-size:3em;
+  color:#ffa0a0;
+  animation:flicker 5s infinite;
+  text-transform:uppercase;
+  font-family: 'Rubik Glitch', 'UnifrakturMaguntia', monospace;
+  transform: skew(-4deg);
+}
+
+.glitch::before,
+.glitch::after{
+  content:attr(data-text);
+  position:absolute;
+  left:0;
+  width:100%;
+}
+
+.glitch::before{
+  color:#ff0000;
+  animation:glitchTop 2.2s infinite linear alternate-reverse;
+  opacity:0.7;
+}
+
+.glitch::after{
+  color:#00ffff;
+  animation:glitchBottom 1.8s infinite linear alternate-reverse;
+  opacity:0.7;
+}
+
+/* ===== ГЛАВНАЯ ===== */
+#home{
+  text-align:center;
+  background:
+  linear-gradient(145deg, rgba(30, 5, 5, 0.85) 0%, rgba(50, 10, 10, 0.9) 100%),
+  url("https://www.transparenttextures.com/patterns/dark-mosaic.png");
+  border-bottom:2px solid #b03030;
+  border-top:2px solid #b03030;
+  position:relative;
+  overflow:hidden;
+}
+
+#home p{
+  font-size:16px;
+  line-height:1.8;
+  color:#f0c0c0;
+  max-width:800px;
+  margin:30px auto;
+  padding:20px;
+  background:rgba(40, 10, 10, 0.6);
+  border-left:4px solid #ff4040;
+  backdrop-filter: blur(4px);
+  transform: skew(-1deg);
+  font-family: 'PT Mono', monospace;
+  box-shadow: -5px 5px 20px rgba(0,0,0,0.5);
+}
+
+/* ===== ПСЕВДОРУНЫ ===== */
+.rune-container {
+    margin: 50px 0;
+    text-align: center;
+}
+
+#runes {
+    font-size: 48px;
+    color: #ffa0a0;
+    text-shadow: 
+        0 0 15px #ff4040,
+        0 0 30px #cc0000,
+        0 0 45px #990000;
+    display: none;
+    background: rgba(40, 10, 10, 0.6);
+    padding: 25px 40px;
+    border: 2px solid #ff4040;
+    border-radius: 0;
+    letter-spacing: 8px;
+    max-width: 80%;
+    margin: 0 auto;
+    animation: rune-pulse 2s infinite alternate;
+    word-wrap: break-word;
+    box-shadow: 0 0 50px rgba(200, 0, 0, 0.5), inset 0 0 30px rgba(0,0,0,0.8);
+    backdrop-filter: blur(4px);
+    transform: skew(-2deg);
+    font-family: 'Rubik Glitch', monospace;
+}
+
+@keyframes rune-pulse {
+    from { 
+        text-shadow: 0 0 15px #ff4040, 0 0 30px #cc0000;
+        opacity: 0.9;
+    }
+    to { 
+        text-shadow: 0 0 25px #ff8080, 0 0 50px #ff0000, 0 0 70px #cc0000;
+        opacity: 1;
+    }
+}
+
+.rune-btn {
+    margin: 30px 0 20px;
+    background: #2a0a0a;
+    border: 3px solid #ff4040;
+    color: #ffc0c0;
+    padding: 18px 36px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Rubik Glitch', 'PT Mono', monospace;
+    cursor: pointer;
+    box-shadow: 
+        8px 8px 0 #1a0000,
+        0 0 25px rgba(200, 0, 0, 0.6),
+        inset 0 -5px 0 #1a0000;
+    transition: all 0.1s ease;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transform: skew(-3deg);
+    position: relative;
+}
+
+.rune-btn::before {
+    content: "⛧";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    opacity: 0.7;
+    color: #ff4040;
+    text-shadow: 0 0 15px #ff0000;
+}
+
+.rune-btn:hover {
+    transform: translate(4px, 4px) skew(-3deg);
+    box-shadow: 
+        4px 4px 0 #1a0000,
+        0 0 35px #ff6060,
+        inset 0 -3px 0 #1a0000;
+    background: #3a1515;
+}
+
+/* ===== МУЗЫКА ===== */
+.music-showcase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.vinyl-player {
+    background: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    max-width: 500px;
+    width: 100%;
+}
+
+.cover-block {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.cover-image {
+    width: 120px;
+    height: 120px;
+    border: 1px solid #ff4040;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transform: skew(-1deg);
+    box-shadow: 0 0 25px rgba(200, 0, 0, 0.4);
+}
+
+.cover-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.track-title {
+    font-size: 20px;
+    color: #ffc0c0;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 0 #2a0a0a, 0 0 20px #ff4040;
+    font-family: 'Rubik Glitch', monospace;
+    transform: skew(-2deg);
+}
+
+.track-meta {
+    font-size: 11px;
+    color: #b08080;
+    line-height: 2;
+}
+
+.track-meta div {
+    margin: 5px 0;
+}
+
+.visualization {
+    height: 45px;
+    background: #1a0000;
+    margin: 20px 0;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 20px #000, 0 0 25px rgba(200, 0, 0, 0.4);
+}
+
+.visualization canvas {
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
+}
+
+audio {
+    font-family: 'Arial', 'Helvetica', sans-serif !important;
+    width: 100%;
+    margin: 10px 0;
+    background: #1a0000;
+    border: none;
+    filter: sepia(30%) hue-rotate(320deg) saturate(250%);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+}
+
+.download-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 24px;
+    background: #1a0000;
+    border: 1px solid #ff4040;
+    color: #ffc0c0;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    box-shadow: 5px 5px 0 #0f0000;
+    transition: 0.1s;
+    font-family: 'Rubik Glitch', monospace;
+    transform: skew(-2deg);
+}
+
+.download-btn:hover {
+    transform: translate(3px, 3px) skew(-2deg);
+    box-shadow: 2px 2px 0 #0f0000;
+    background: #2a0a0a;
+}
+
+/* ===== ФОРМА ===== */
+input,textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  background:rgba(30, 5, 5, 0.7);
+  backdrop-filter: blur(3px);
+  border:2px solid #ff4040;
+  color:#f0c0c0;
+  font-family:'PT Mono', monospace;
+  font-size:14px;
+  box-shadow: inset 0 0 10px #000;
+  transform: skew(-1deg);
+}
+
+input:focus,textarea:focus{
+  outline:none;
+  border-color:#ff8080;
+  box-shadow: inset 0 0 10px #000, 0 0 25px #ff4040;
+}
+
+button{
+  padding:15px 30px;
+  background:#2a0a0a;
+  border:3px solid #ff4040;
+  color:#ffc0c0;
+  font-family:'Rubik Glitch', monospace;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:7px 7px 0 #1a0000;
+  transition:0.1s;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  transform: skew(-2deg);
+}
+
+button:hover{
+  transform:translate(4px,4px) skew(-2deg);
+  box-shadow:3px 3px 0 #1a0000;
+  background:#3a1515;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  background:rgba(20, 5, 5, 0.8);
+  backdrop-filter: blur(5px);
+  border-top:2px solid #b03030;
+  color:#b08080;
+  font-size:12px;
+  letter-spacing:2px;
+  transform: skew(-1deg);
+  font-family: 'PT Mono', monospace;
+  position: relative;
+}
+
+footer::before {
+  content: "⛧ ⚔️ ❤️ ⚔️ ⛧";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: rgba(200, 50, 50, 0.5);
+  text-shadow: 0 0 15px #ff0000;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ДЕМОНИЧЕСКИЕ ЭЛЕМЕНТЫ -->
+<div class="pentagrams"></div>
+<div class="chains"></div>
+<div class="blood-drips"></div>
+<div class="neon-pentagram"></div>
+<div class="neon-pentagram2"></div>
+<div class="demonic-symbols"></div>
+<div class="fire-particles"></div>
+<div class="candle-left"></div>
+<div class="candle-right"></div>
+<div class="fade-spots"></div>
+<div class="scanlines"></div>
+<canvas id="particleCanvas"></canvas>
+
+<nav>
+<ul>
+<li><a class="active" data-tab="home">Главная</a></li>
+<li><a data-tab="about">О DemonSon</a></li>
+<li><a data-tab="music">Музыка</a></li>
+<li><a data-tab="contacts">Контакты</a></li>
+</ul>
+</nav>
+
+<section id="home" class="active">
+<div class="container">
+<h1 class="glitch" data-text="DEMONSON">DEMONSON</h1>
+<p>Тяжёлый рок. Тёмный фольклор. Басовый дабстеп. Мистический лес оживает в звуке. Каждая нота — шаг в глубину древней сказки, где ритм становится пульсом земли.</p>
+
+<div class="rune-container">
+    <button class="rune-btn" onclick="activateRunes()">⎈ АКТИВИРОВАТЬ ПСЕВДОРУНЫ ⎈</button>
+    <div id="runes">
+        ᚱ ᛟ ᚲ ᚲ   ᚠ ᚢ ᚱ ᛁ ᚨ   ᚾ ᛟ ᛁ ᛋ ᛖ
+    </div>
+</div>
+
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+<h2>О DemonSon</h2>
+<p>Агрессивный ритм, густой бас и фольклорная мистика. Звук как древний лес ночью, где ветер шепчет на забытом языке, а земля дрожит от тяжёлых гитар.</p>
+</div>
+</section>
+
+<section id="music">
+<div class="container">
+<h2>Музыка</h2>
+
+<div class="music-showcase">
+    <div class="vinyl-player">
+        <div class="cover-block">
+            <div class="cover-image">
+                <img src="обложка песни Тише.jpg" alt="Тише…-41">
+            </div>
+            <div class="track-info">
+                <div class="track-title">ТИШЕ... -41</div>
+                <div class="track-meta">
+                    <div>⏱️ 2026</div>
+                    <div>🔊 WAV / 44.1kHz</div>
+                    <div>📷 DemonSon</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="visualization">
+            <canvas id="visualizer" width="500" height="40"></canvas>
+        </div>
+        
+        <audio id="audioPlayer" controls preload="metadata">
+            <source src="Тише…-41.wav" type="audio/wav">
+            Ваш браузер не поддерживает аудио.
+        </audio>
+        
+        <a href="Тише…-41.wav" download class="download-btn">⬇ СКАТЧАТЬ ТРЕК</a>
+    </div>
+</div>
+
+</div>
+</section>
+
+<section id="contacts">
+<div class="container">
+<h2>Контакты</h2>
+<form id="contactForm">
+<input type="text" placeholder="Имя" required>
+<input type="email" placeholder="Email" required>
+<textarea rows="4" placeholder="Сообщение"></textarea>
+<button type="submit">Отправить</button>
+</form>
+</div>
+</section>
+
+<footer>© 2026 DemonSon • ЗАПИСЬ С ПЛЁНКИ • СИГНАЛ ШУМА</footer>
+
+<script>
+// Вкладки
+document.querySelectorAll("nav a").forEach(tab=>{
+  tab.addEventListener("click",()=>{
+    document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+    document.getElementById(tab.dataset.tab).classList.add("active");
+    document.querySelectorAll("nav a").forEach(t=>t.classList.remove("active"));
+    tab.classList.add("active");
+  });
+});
+
+// Частицы
+const canvas=document.getElementById("particleCanvas");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+const particles=[];
+for(let i=0;i<200;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*5+1,
+    dx:(Math.random()-0.5)*0.3,
+    dy:(Math.random()-0.5)*0.3,
+    alpha:Math.random()*0.7 + 0.2,
+    color:Math.random() > 0.3 ? 'rgba(200,0,0,' : 'rgba(150,0,0,'
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.dx;
+    p.y+=p.dy;
+    if(p.x<0||p.x>canvas.width)p.dx*=-1;
+    if(p.y<0||p.y>canvas.height)p.dy*=-1;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.color + p.alpha+")";
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// Визуализатор
+const audio = document.getElementById('audioPlayer');
+const visualizer = document.getElementById('visualizer');
+const vizCtx = visualizer.getContext('2d');
+
+if (audio && visualizer) {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = audioContext.createAnalyser();
+    analyser.fftSize = 256;
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    
+    let source;
+    
+    audio.addEventListener('play', () => {
+        if (audioContext.state === 'suspended') {
+            audioContext.resume();
+        }
+        
+        if (!source) {
+            source = audioContext.createMediaElementSource(audio);
+            source.connect(analyser);
+            analyser.connect(audioContext.destination);
+        }
+        
+        function draw() {
+            requestAnimationFrame(draw);
+            analyser.getByteFrequencyData(dataArray);
+            
+            vizCtx.clearRect(0, 0, visualizer.width, visualizer.height);
+            vizCtx.fillStyle = '#1a0000';
+            vizCtx.fillRect(0, 0, visualizer.width, visualizer.height);
+            
+            const barWidth = (visualizer.width / bufferLength) * 2.5;
+            let x = 0;
+            
+            for (let i = 0; i < bufferLength; i++) {
+                const barHeight = (dataArray[i] / 255) * visualizer.height;
+                const hue = 0 + (barHeight / visualizer.height) * 20;
+                vizCtx.fillStyle = `hsl(${hue}, 100%, 60%)`;
+                vizCtx.fillRect(x, visualizer.height - barHeight, barWidth, barHeight);
+                x += barWidth + 1;
+            }
+        }
+        draw();
+    });
+}
+
+// Случайные помехи
+setInterval(() => {
+  if(Math.random() > 0.6) {
+    document.body.style.transform = `skew(${Math.random() * 1}deg, 0deg)`;
+    setTimeout(() => {
+      document.body.style.transform = '';
+    }, 150);
+  }
+}, 3000);
+
+// Активация рун
+function activateRunes() {
+    const runeBlock = document.getElementById("runes");
+    runeBlock.style.display = "block";
+    document.body.style.animation = "shake 0.3s infinite";
+
+    const btn = document.querySelector('.rune-btn');
+    if(btn) {
+        btn.style.transform = 'translate(4px, 4px) skew(-3deg)';
+        btn.style.boxShadow = '4px 4px 0 #1a0000';
+    }
+
+    setTimeout(() => {
+        if(btn) {
+            btn.style.transform = '';
+            btn.style.boxShadow = '';
+        }
+    }, 200);
+
+    setTimeout(() => {
+        document.body.style.animation = "none";
+    }, 2000);
+}
+
+// Тряска
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes shake {
+  0% { transform: translate(1px, 1px) skew(0deg); }
+  20% { transform: translate(-2px, -1px) skew(-1deg); }
+  40% { transform: translate(-3px, 2px) skew(1deg); }
+  60% { transform: translate(3px, -2px) skew(-1deg); }
+  80% { transform: translate(-1px, 2px) skew(1deg); }
+  100% { transform: translate(1px, -1px) skew(0deg); }
+}`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>
