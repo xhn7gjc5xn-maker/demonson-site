@@ -103,6 +103,16 @@ body::before {
   100%{transform:translate(0,0) scale(1); opacity:0.3;}
 }
 
+/* ===== ШЕЙДЕРНЫЙ ФОН ===== */
+#shaderCanvas{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  pointer-events:none;
+  z-index:-1;
+}
+
 /* ===== ЧАСТИЦЫ ===== */
 #particleCanvas{
   position:fixed;
@@ -130,29 +140,6 @@ body::before {
     0%, 100% { opacity: 0.7; }
     33% { opacity: 1; transform: scale(1.02); }
     66% { opacity: 0.5; transform: scale(0.98); }
-}
-
-/* ===== ЛАВА ВНИЗУ (ЗАМЕТНАЯ) ===== */
-.lava-bottom {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 150px;
-    background: linear-gradient(0deg, 
-        rgba(255, 100, 0, 0.5) 0%,
-        rgba(200, 50, 0, 0.3) 30%,
-        transparent 100%
-    );
-    pointer-events: none;
-    z-index: 2;
-    mix-blend-mode: overlay;
-    animation: lava-flow 6s ease-in-out infinite;
-}
-
-@keyframes lava-flow {
-    0%, 100% { opacity: 0.6; transform: translateY(0); }
-    50% { opacity: 1; transform: translateY(-15px); }
 }
 
 /* ===== НЕОНОВЫЕ ПЕНТАГРАММЫ (ЯРКИЕ) ===== */
@@ -213,39 +200,6 @@ body::before {
     100% { background-position: 0 80px; }
 }
 
-/* ===== ДЕМОНИЧЕСКИЕ ЦЕПИ ===== */
-.chains {
-    position: fixed;
-    inset: 0;
-    background: 
-        repeating-linear-gradient(45deg, 
-            transparent 0px,
-            transparent 30px,
-            rgba(180, 60, 60, 0.25) 30px,
-            rgba(180, 60, 60, 0.25) 34px,
-            transparent 34px,
-            transparent 70px
-        ),
-        repeating-linear-gradient(135deg, 
-            transparent 0px,
-            transparent 30px,
-            rgba(180, 60, 60, 0.25) 30px,
-            rgba(180, 60, 60, 0.25) 34px,
-            transparent 34px,
-            transparent 70px
-        );
-    pointer-events: none;
-    z-index: 2;
-    mix-blend-mode: overlay;
-    animation: chains-rattle 8s infinite;
-}
-
-@keyframes chains-rattle {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(3px, -2px) rotate(0.8deg); }
-    75% { transform: translate(-2px, 3px) rotate(-0.8deg); }
-}
-
 /* ===== ДЕМОНИЧЕСКИЕ СИМВОЛЫ (ЯРКИЕ) ===== */
 .demonic-symbols {
     position: fixed;
@@ -287,55 +241,6 @@ body::before {
     0%, 100% { background-position: 0 0; }
     33% { background-position: 15px 25px; }
     66% { background-position: -15px -15px; }
-}
-
-/* ===== СВЕЧИ ===== */
-.candle-left {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 30px;
-    height: 100px;
-    background: linear-gradient(0deg, #8B4513 0%, #A0522D 60%, #FFD700 90%);
-    border-radius: 5px 5px 0 0;
-    opacity: 0.7;
-    animation: candle-flicker 2s infinite;
-    z-index: 10;
-}
-
-.candle-right {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 30px;
-    height: 100px;
-    background: linear-gradient(0deg, #8B4513 0%, #A0522D 60%, #FFD700 90%);
-    border-radius: 5px 5px 0 0;
-    opacity: 0.7;
-    animation: candle-flicker 2.5s infinite;
-    z-index: 10;
-}
-
-.candle-left::after, .candle-right::after {
-    content: "";
-    position: absolute;
-    top: -25px;
-    left: 5px;
-    width: 20px;
-    height: 35px;
-    background: radial-gradient(circle, #FF8C00 0%, #FF4500 50%, transparent 80%);
-    filter: blur(5px);
-    animation: flame 1s infinite;
-}
-
-@keyframes candle-flicker {
-    0%, 100% { opacity: 0.6; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(1.15); }
-}
-
-@keyframes flame {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.4); opacity: 1; }
 }
 
 /* ===== НАВИГАЦИЯ ===== */
@@ -434,9 +339,92 @@ h1, h2{
   50% { text-shadow: 0 0 15px #50e0d0, 0 0 30px #30b0a0, 0 0 45px #108070; }
 }
 
+
+.hero-title {
+  position: relative;
+  display: inline-block;
+  padding: 8px 18px 26px;
+  isolation: isolate;
+}
+
+.title-fire-wall {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -185px;
+  width: min(760px, calc(100vw - 120px));
+  height: 280px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.title-fire-wall .fire-wall {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  filter: url(#realistic-fire) contrast(150%) brightness(1.1);
+}
+
+.fire-wall .flame-layer {
+  position: absolute;
+  bottom: -20px;
+  width: 100%;
+  height: 120%;
+  background: linear-gradient(to top,
+      #fff 0%,
+      #ffdc00 20%,
+      #ff8500 40%,
+      #ff4100 60%,
+      transparent 90%);
+  transform-origin: bottom;
+}
+
+.fire-wall .layer-1 {
+  opacity: 0.7;
+  animation: slow-rise 8s infinite ease-in-out alternate;
+}
+
+.fire-wall .layer-2 {
+  opacity: 0.5;
+  height: 140%;
+  animation: slow-rise 5s infinite ease-in-out alternate-reverse;
+  filter: blur(5px);
+}
+
+
+.title-fire-wall .layer-1 { opacity: 0.7; animation-duration: 8s; }
+.title-fire-wall .layer-2 { opacity: 0.5; height: 140%; animation-duration: 5s; filter: blur(5px); }
+
+.lava-wall {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -30px;
+  height: 38vh;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: screen;
+}
+
+.lava-wall .fire-wall {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  filter: url(#realistic-lava) contrast(155%) brightness(1.08);
+}
+
+.lava-wall .layer-1 { opacity: 0.52; animation-duration: 9s; }
+.lava-wall .layer-2 { opacity: 0.38; height: 145%; filter: blur(6px); animation-duration: 6s; }
+
+@keyframes slow-rise {
+  0% { transform: scaleY(0.9) skewX(-2deg); }
+  100% { transform: scaleY(1.1) skewX(2deg); }
+}
+
 /* ===== GLITCH ===== */
 .glitch{
   position:relative;
+  z-index:2;
   font-size:3em;
   color:#80e0d0;
   animation:flicker 5s infinite;
@@ -805,20 +793,23 @@ footer::before {
 
 <!-- ДЕМОНИЧЕСКИЕ ЭЛЕМЕНТЫ (ВСЕ ЗАМЕТНЫЕ) -->
 <div class="demonic-fire"></div>
-<div class="lava-bottom"></div>
+<div class="lava-wall" aria-hidden="true">
+  <div class="fire-wall">
+    <div class="flame-layer layer-1"></div>
+    <div class="flame-layer layer-2"></div>
+  </div>
+</div>
 <div class="pentagram-glow"></div>
 <div class="pentagram-glow2"></div>
 <div class="blood-drips"></div>
-<div class="chains"></div>
 <div class="demonic-symbols"></div>
 <div class="fire-particles"></div>
-<div class="candle-left"></div>
-<div class="candle-right"></div>
 
 <!-- ОСНОВНЫЕ ЭЛЕМЕНТЫ ДК -->
 <div class="fade-spots"></div>
 <div class="scanlines"></div>
 <div class="fog"></div>
+<canvas id="shaderCanvas"></canvas>
 <canvas id="particleCanvas"></canvas>
 
 <nav>
@@ -832,7 +823,31 @@ footer::before {
 
 <section id="home" class="active">
 <div class="container">
+<div class="hero-title">
 <h1 class="glitch" data-text="DEMONSON">DEMONSON</h1>
+<div class="title-fire-wall" aria-hidden="true">
+  <div class="fire-wall">
+    <div class="flame-layer layer-1"></div>
+    <div class="flame-layer layer-2"></div>
+  </div>
+</div>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false">
+  <filter id="realistic-fire" x="-10%" y="-10%" width="120%" height="120%">
+    <feTurbulence type="fractalSum" baseFrequency="0.02 0.01" numOctaves="4" seed="5">
+      <animate attributeName="baseFrequency" dur="20s" values="0.02 0.01; 0.02 0.015; 0.02 0.01" repeatCount="indefinite" />
+    </feTurbulence>
+    <feDisplacementMap in="SourceGraphic" scale="90" />
+  </filter>
+  <filter id="realistic-lava" x="-10%" y="-10%" width="120%" height="120%">
+    <feTurbulence type="fractalSum" baseFrequency="0.018 0.009" numOctaves="4" seed="9">
+      <animate attributeName="baseFrequency" dur="24s" values="0.018 0.009; 0.02 0.013; 0.018 0.009" repeatCount="indefinite" />
+    </feTurbulence>
+    <feDisplacementMap in="SourceGraphic" scale="95" />
+  </filter>
+</svg>
+
+</div>
 <p>Тяжёлый рок. Тёмный фольклор. Басовый дабстеп. Мистический лес оживает в звуке. Каждая нота — шаг в глубину древней сказки, где ритм становится пульсом земли.</p>
 
 <div class="rune-container">
@@ -912,6 +927,131 @@ document.querySelectorAll("nav a").forEach(tab=>{
     tab.classList.add("active");
   });
 });
+
+
+// WebGL шейдерный фон (огонь/лед)
+const shaderCanvas = document.getElementById('shaderCanvas');
+if (shaderCanvas) {
+  const gl = shaderCanvas.getContext('webgl', { alpha: true, antialias: false, powerPreference: 'low-power' });
+
+  if (gl) {
+    const vsSource = `attribute vec2 p; void main(){ gl_Position = vec4(p,0.0,1.0); }`;
+    const fsSource = `
+      precision highp float;
+      uniform float time;
+      uniform vec2 resolution;
+
+      float hash(float n) { return fract(sin(n) * 43758.5453123); }
+
+      float noise(vec3 p) {
+        vec3 i = floor(p);
+        vec3 f = fract(p);
+        f = f * f * (3.0 - 2.0 * f);
+        float n = i.x + i.y * 57.0 + 113.0 * i.z;
+        return mix(mix(mix(hash(n), hash(n + 1.0), f.x),
+                       mix(hash(n + 57.0), hash(n + 58.0), f.x), f.y),
+                   mix(mix(hash(n + 113.0), hash(n + 114.0), f.x),
+                       mix(hash(n + 170.0), hash(n + 171.0), f.x), f.y), f.z);
+      }
+
+      float fbm(vec3 p) {
+        float f = 0.5 * noise(p); p *= 2.02;
+        f += 0.25 * noise(p); p *= 2.03;
+        f += 0.125 * noise(p); p *= 2.01;
+        f += 0.0625 * noise(p);
+        return f;
+      }
+
+      void main() {
+        vec2 uv = gl_FragCoord.xy / resolution.xy;
+        vec2 centered = uv - 0.5;
+        centered.x *= resolution.x / resolution.y;
+
+        vec3 p = vec3(uv * 3.2, time * 0.18);
+        float n = fbm(p + vec3(centered * 0.45, 0.0));
+        float n2 = fbm(p * 1.8 - vec3(centered.yx * 0.35, time * 0.07));
+
+        float split = smoothstep(0.37, 0.63, uv.x + (n - 0.5) * 0.23);
+
+        vec3 fire = vec3(1.0, 0.40, 0.10) * (0.45 + 1.15 * n) + vec3(0.35, 0.08, 0.0) * n2;
+        vec3 ice  = vec3(0.10, 0.50, 1.0) * (0.45 + 1.10 * n2) + vec3(0.0, 0.10, 0.30) * n;
+
+        float filaments = pow(max(n * n2, 0.0), 0.58) * 2.2;
+        float vignette = 1.0 - smoothstep(0.35, 0.88, length(centered));
+
+        vec3 finalColor = mix(fire, ice, split) * filaments * (0.65 + 0.45 * vignette);
+        gl_FragColor = vec4(finalColor, 0.9);
+      }
+    `;
+
+    function createShader(type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+        gl.deleteShader(shader);
+        return null;
+      }
+      return shader;
+    }
+
+    const program = gl.createProgram();
+    const vs = createShader(gl.VERTEX_SHADER, vsSource);
+    const fs = createShader(gl.FRAGMENT_SHADER, fsSource);
+
+    if (vs && fs) {
+      gl.attachShader(program, vs);
+      gl.attachShader(program, fs);
+      gl.linkProgram(program);
+
+      if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        gl.useProgram(program);
+
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+          -1, -1,  1, -1, -1,  1,
+          -1,  1,  1, -1,  1,  1
+        ]), gl.STATIC_DRAW);
+
+        const pLoc = gl.getAttribLocation(program, 'p');
+        gl.enableVertexAttribArray(pLoc);
+        gl.vertexAttribPointer(pLoc, 2, gl.FLOAT, false, 0, 0);
+
+        const tLoc = gl.getUniformLocation(program, 'time');
+        const rLoc = gl.getUniformLocation(program, 'resolution');
+
+        function resizeShaderCanvas() {
+          const scale = Math.min(window.devicePixelRatio || 1, 1.2) * 0.8;
+          shaderCanvas.width = Math.max(1, Math.floor(window.innerWidth * scale));
+          shaderCanvas.height = Math.max(1, Math.floor(window.innerHeight * scale));
+          gl.viewport(0, 0, shaderCanvas.width, shaderCanvas.height);
+        }
+
+        let lastShaderFrame = 0;
+        function drawShader(t) {
+          if (document.hidden) {
+            requestAnimationFrame(drawShader);
+            return;
+          }
+
+          if (t - lastShaderFrame > 33) {
+            lastShaderFrame = t;
+            gl.uniform1f(tLoc, t * 0.001);
+            gl.uniform2f(rLoc, shaderCanvas.width, shaderCanvas.height);
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+          }
+          requestAnimationFrame(drawShader);
+        }
+
+        resizeShaderCanvas();
+        window.addEventListener('resize', resizeShaderCanvas);
+        requestAnimationFrame(drawShader);
+      }
+    }
+  }
+}
 
 // Частицы
 const canvas=document.getElementById("particleCanvas");
